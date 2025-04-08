@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>K-Beauty Analytics</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f2f5;
+      padding: 40px;
+      color: #333;
+      position: relative;
+    }
+    h2 {
+      color: #e91e63;
+    }
+    .chart-container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+    /* Стиль для кнопки "Главная" */
+    .main-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 12px 24px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .main-button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <!-- Кнопка "Главная" в правом верхнем углу -->
+  <a href="index.html" class="main-button">Главная</a>
+
+  <div class="chart-container">
+    <h2> Популярность категорий корейской косметики</h2>
+    <canvas id="polarChart"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h2> Продажи по дням недели</h2>
+    <canvas id="barChart"></canvas>
+  </div>
+
+  <script>
+    const polarData = {
+      labels: ['Тоники', 'Эссенции', 'Кремы', 'Маски', 'Солнцезащитные средства'],
+      datasets: [{
+        label: 'Популярность',
+        data: [28, 22, 35, 25, 18],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.7)',
+          'rgba(255, 159, 64, 0.7)',
+          'rgba(153, 102, 255, 0.7)',
+          'rgba(75, 192, 192, 0.7)',
+          'rgba(255, 205, 86, 0.7)'
+        ]
+      }]
+    };
+
+    const barData = {
+      labels: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+      datasets: [{
+        label: 'Количество заказов',
+        data: [40, 55, 60, 48, 72, 90, 50],
+        backgroundColor: 'rgba(54, 162, 235, 0.7)'
+      }]
+    };
+
+    new Chart(document.getElementById('polarChart'), {
+      type: 'polarArea',
+      data: polarData,
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Категории продукции'
+          }
+        }
+      }
+    });
+
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: barData,
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Объём продаж по дням'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+  <footer>
+    <p>© 2025 Aicare</p>
+</footer>
+</body>
+</html>
